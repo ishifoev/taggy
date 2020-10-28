@@ -45,6 +45,10 @@ trait TaggableTrait
     private function addTags(Collection $tags)
     {
        $sync = $this->tags()->syncWithoutDetaching($tags->pluck('id')->toArray());
+       
+       foreach(array_get($sync, 'attached') as $attachedId) {
+           $tags->where('id', $attachedId)->first()->increment('count');
+       }
     }
 
     private function getWorkableTags($tags)
