@@ -15,29 +15,47 @@ trait TaggableTrait
     {
         return $this->morphToMany(Tag::class, 'taggable');
     }
-
+    
+    /**
+     * Add tag
+     */
     public function tag($tags)
     {
        $this->addTags($this->getWorkableTags($tags));
     }
 
-      public static function makeTagArray($tagNames)
+     /**
+      * Untag tags
+      */
+    public function untag($tags = null)
     {
-        if(is_array($tagNames) && count($tagNames) == 1) {
-            $tagNames = reset($tagNames);
-        }
+          if($tags === null) {
+              $this->removeAllTags();
+              return;
+          }
 
-        if(is_string($tagNames)) {
-            $tagNames = explode(',', $tagNames);
-        } elseif(!is_array($tagNames)) {
-            $tagNames = array(null);
-        }
-
-        $tagNames = array_map('trim', $tagNames);
-
-        return array_values($tagNames);
+          $this->removeTags($this->getWorkableTags($tags));
     }
 
+    /**
+     * Remove all tags
+     */
+    private function removeAllTags()
+    {
+        $this->removeTags($this->tags);
+    }
+
+    /**
+     *Remove tags 
+     */
+    private function removeTags(Collection $tags)
+    {
+       $this->tags()->detach($tags);
+
+       foreach($tags->where('count', '>', 0) as $tag) {
+           $tag->decrement('count');
+       }
+    }
 
     /**
      * We just need use add tags Collection
