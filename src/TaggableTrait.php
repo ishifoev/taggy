@@ -5,9 +5,12 @@ namespace Amalikov\Taggy;
 use Amalikov\Taggy\Models\Tag;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
+use Amalikov\Taggy\Scopes\TaggableScopesTrait;
 
 trait TaggableTrait
 {
+    use TaggableScopesTrait;
+    
     /**
      * Polymorphic relationship tags
      */
