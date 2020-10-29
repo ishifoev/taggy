@@ -24,6 +24,15 @@ trait TaggableTrait
        $this->addTags($this->getWorkableTags($tags));
     }
 
+    /**
+     * Retag tags
+     */
+    public function retag($tags)
+    {
+        $this->removeAllTags();
+        $this->tag($tags);
+    }
+
      /**
       * Untag tags
       */
