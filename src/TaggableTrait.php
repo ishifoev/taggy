@@ -6,6 +6,8 @@ use Amalikov\Taggy\Models\Tag;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 use Amalikov\Taggy\Scopes\TaggableScopesTrait;
+use Illuminate\Support\Str;
+use Illuminate\Support\Arr;
 
 trait TaggableTrait
 {
@@ -76,7 +78,7 @@ trait TaggableTrait
     {
        $sync = $this->tags()->syncWithoutDetaching($tags->pluck('id')->toArray());
        
-       foreach(array_get($sync, 'attached') as $attachedId) {
+       foreach(Arr::get($sync, 'attached') as $attachedId) {
            $tags->where('id', $attachedId)->first()->increment('count');
        }
     }
@@ -126,7 +128,7 @@ trait TaggableTrait
     private function normaliseTagNames(array $tags)
     {
          return array_map(function ($tag) {
-            return str_slug($tag);
+            return Str::slug($tag);
          }, $tags);
     }
 }
