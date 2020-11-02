@@ -2,8 +2,6 @@
 
 use Illuminate\Support\Str;
 
-use function Symfony\Component\String\s;
-
 class TaggyStringUsageTest extends TestCase
 {
     protected $lesson;
