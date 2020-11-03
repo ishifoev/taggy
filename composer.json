@@ -1,6 +1,7 @@
 {
     "name": "amalikov/taggy",
     "description": "An Eloquent tagging package for laravel",
+    "license": "MIT",
     "authors": [
         {
             "name": "AlexMalikov94",
