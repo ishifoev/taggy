@@ -37,3 +37,38 @@ class YourEloquentModel extends Model
     use TaggableTrait;
 }
 ```
+
+Create a tags data for table that you use for example in controller or whatever place you want:
+
+```
+use Illuminate\Support\Str;
+
+$tags = Tag::create([
+ 'name' => 'Tag Name',
+ 'slug' => Str::slug('Tag Name')
+]);
+
+```
+
+You just need to pass the data that working with the models 
+```
+$model = new YourEloquentModel;
+$model->title = 'Test';
+$model->save();
+```
+
+## If you would like to tag something
+
+```
+$model->tag(['your_tag_name'])
+````
+
+## If you would like to untag something
+```
+$model->untag(['your_tag_name'])
+````
+
+## If you would like to retag something
+```
+$model->retag(['your_tag_name'])
+````
