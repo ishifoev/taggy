@@ -57,18 +57,29 @@ $model->title = 'Test';
 $model->save();
 ```
 
-## If you would like to tag something
+## Set a new tags
+
+You can set a new tags like this:
 
 ```
-$model->tag(['your_tag_name'])
+$model->tag(['your_tag_name']);
 ````
 
-## If you would like to untag something
+## Untag existing tags
+
+You can untag existing tag
+
 ```
-$model->untag(['your_tag_name'])
+$model->untag(['your_tag_name']);
 ````
 
-## If you would like to retag something
+## Untag all tags
+
 ```
-$model->retag(['your_tag_name'])
+$model->untag();
+````
+
+## Retag existing tag
+```
+$model->retag(['your_tag_name']);
 ````
